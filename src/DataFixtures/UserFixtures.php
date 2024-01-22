@@ -17,8 +17,8 @@ class UserFixtures extends Fixture
             $user = new User();
             $user->setnom($faker->firstName());
             $user->setprenom($faker->lastName());
-            $user->setage($faker->numberBetween(1.100));
-            $user->settelephone($faker->e164PhoneNumber());
+            $user->setage($faker->numberBetween(18,99));
+            $user->settelephone($faker->randomElement(['0636252415']));
             $user->setEmail($faker->email());
             $user->setadresse($faker->address());
             $user->setRoles($faker->randomElement([['ROLE_USER'],['ROLE_ADMIN']]));
