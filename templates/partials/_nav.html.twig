@@ -10,31 +10,36 @@
 					<li class="nav-item">
 						<a class="nav-link active" aria-current="page" href="{{path('homepage')}}">Accueil</a>
 					</li>
-					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-						<li class="nav-item">
-							{# <a href="nav-link active" aria-current="page" href="{{path('admin')}}">Admin</a> #}
-                            	<a class="nav-link active" aria-current="page" href="{{path('admin')}}">Admin</a>
-						</li>
-					{% endif %}
+					
+				{% if is_granted('ROLE_ADMIN') %}
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="{{ path('admin') }}">Admin</a>
+					</li>
+				{% endif %}
+			</ul>
+			<div class="d-flex gap-3">
+				
 
-				</ul>
-
-				<div class="d-flex gap-3">
-
-					{# {% if app.user %} #}
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-
-						<a href="{{ path('app_logout')}}" class="btn btn-primary">Déconnexion</a>
+				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+					
+					{% if is_granted('ROLE_ADMIN') %}
+						<a href="{{ path('app_logout') }}" class="btn btn-danger">Déconnexion</a>
 					{% else %}
-						<a href="{{ path('app_login')}}" class="btn btn-primary">Connexion</a>
+						<a href="{{ path('app_logout') }}" class="btn btn-primary"> Déconnexion</a>
+					{% endif %}
+				
+				{% else %}
+					
+					<a href="{{ path('app_login') }}" class="btn btn-primary">Connexion</a>
+					
+					{% if not is_granted('ROLE_ADMIN') %}
+					<a href="{{ path('app_register') }}" class="btn btn-primary">Inscription</a>
 					{% endif %}
 
-
-					<a href="{{ path('app_register')}}" class="btn btn-primary">Inscription</a>
-				</div>
+				{% endif %}
 
 
 			</div>
 		</div>
-	</nav>
+	</div>
 </nav>
